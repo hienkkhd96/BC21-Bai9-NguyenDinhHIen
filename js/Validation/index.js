@@ -182,6 +182,28 @@ isNumber = function (el, minValue, maxValue) {
   }
   return inValid;
 };
+//  params:
+// el- element check,
+// arr- array check
+// attr- value check
+
+const isExists = (el, arr, attr, message) => {
+  const parent = el.parentNode;
+  const notification = parent.parentNode.querySelector(".sp-thongbao");
+  const value = el.value.trim();
+  const indexMatch = arr.findIndex((x) => {
+    return x[attr] == value;
+  });
+  if (indexMatch >= 0) {
+    notification.style.display = "block";
+    notification.innerText = message;
+    return true;
+  } else {
+    notification.style.display = "none";
+    notification.innerText = "";
+    return false;
+  }
+};
 let formatter = new Intl.NumberFormat("vi-VN", {
   style: "currency",
   currency: "VND",

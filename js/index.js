@@ -24,6 +24,7 @@ addNvBtn.onclick = () => {
   modalHead.innerText = "Thêm nhân viên";
   modalAdd.style.display = "block";
   modalUpdate.style.display = "none";
+  userName.removeAttribute("disabled");
 };
 addUserBtn.onclick = () => {
   const isValid =
@@ -43,7 +44,9 @@ addUserBtn.onclick = () => {
       isPasswordError(password) &
       isEmail(email) &
       isNumber(salary, 1000000, 20000000) &
-      isNumber(workingHours, 80, 200);
+      isNumber(workingHours, 80, 200) &
+      !isExists(userName, listNv, "userName", "Username đã tồn tại") &
+      !isExists(email, listNv, "email", "Email đã tồn tại");
 
   if (!!isValid) {
     const newStaff = new Staff(

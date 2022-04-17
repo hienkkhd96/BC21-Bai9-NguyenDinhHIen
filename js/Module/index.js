@@ -45,13 +45,13 @@ class Staff {
   }
   calcTypeStaff() {
     if (this.workingHours >= 192) {
-      return "Nhân viên xuất săc";
+      return "Xuất sắc";
     } else if (this.workingHours >= 176) {
-      return "Nhân viên giỏi";
+      return "Giỏi";
     } else if (this.workingHours >= 160) {
-      return "Nhân viên khá";
+      return "Khá";
     } else {
-      return "Nhân viên trung bình";
+      return "Trung bình";
     }
   }
 }

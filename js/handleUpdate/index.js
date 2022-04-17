@@ -14,6 +14,7 @@ const updateNv = function (index) {
   modalUpdate.style.display = "block";
   modalAdd.style.display = "none";
   myModal.show();
+  userName.setAttribute("disabled", "disabled");
   setValueInput(userName, nhanvien.userName);
   setValueInput(fullName, nhanvien.fullName);
   setValueInput(email, nhanvien.email);
@@ -24,6 +25,26 @@ const updateNv = function (index) {
   setValueInput(position, nhanvien.level);
 };
 modalUpdate.onclick = function () {
+  const isExistsEmail = () => {
+    const parent = email.parentNode;
+    const notification = parent.parentNode.querySelector(".sp-thongbao");
+    const value = email.value.trim();
+    const matchIndex = listNv.findIndex((x) => {
+      return x.email == value;
+    });
+    if (matchIndex >= 0) {
+      if (matchIndex != updateIndex) {
+        notification.style.display = "block";
+        notification.innerText =
+          "Email bạn nhập đã được đăng ký cho tài khoản khác";
+        return true;
+      }
+    } else {
+      notification.style.display = "none";
+      notification.innerText = "";
+      return false;
+    }
+  };
   const isValid =
     kiemTraRong(
       userName,
@@ -41,7 +62,9 @@ modalUpdate.onclick = function () {
       isPasswordError(password) &
       isEmail(email) &
       isNumber(salary, 1000000, 20000000) &
-      isNumber(workingHours, 80, 200);
+      isNumber(workingHours, 80, 200) &
+      !isExistsEmail();
+
   if (!!isValid) {
     const staffUpdate = new Staff(
       userName.value,
@@ -62,5 +85,6 @@ modalUpdate.onclick = function () {
     };
     localStorage.setItem("LIST-NV", JSON.stringify(listNv));
     rederListNv(listNv);
+    myModal.hide();
   }
 };
