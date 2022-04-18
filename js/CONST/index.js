@@ -17,6 +17,13 @@ const modalHead = document.querySelector("#myModal #header-title");
 const modalAdd = document.querySelector("#myModal #btnThemNV");
 const modalUpdate = document.querySelector("#myModal #btnCapNhat");
 let listNv = JSON.parse(localStorage.getItem("LIST-NV")) || [];
+let myModalElement = document.getElementById("myModal");
 const myModal = new bootstrap.Modal(document.getElementById("myModal"), {
   keyboard: false,
+});
+$("#myModal").on("show.bs.modal", function () {
+  notifications.forEach((x) => {
+    x.style.display = "none";
+    x.innerText = "";
+  });
 });

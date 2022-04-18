@@ -1,3 +1,7 @@
+function formatDate(dateString) {
+  var subDateStr = dateString.split("-");
+  return (str = subDateStr[2] + "/" + subDateStr[1] + "/" + subDateStr[0]);
+}
 const rederListNv = (arr) => {
   const html = arr
     .map((x, index) => {
@@ -7,7 +11,7 @@ const rederListNv = (arr) => {
   </td>
   <td>${x.fullName}</td>
   <td>${x.email}</td>
-  <td>${x.workingDays}</td>
+  <td>${formatDate(x.workingDays)}</td>
   <td>${x.position}</td>
   <td>${formatter.format(x.totalSalary)}</td>
   <td>${x.typeStaff}</td>
@@ -21,6 +25,14 @@ if (listNv.length > 0) {
   rederListNv(listNv);
 }
 addNvBtn.onclick = () => {
+  setValueInput(userName, "");
+  setValueInput(fullName, "");
+  setValueInput(email, "");
+  setValueInput(password, "");
+  setValueInput(workingDays, "");
+  setValueInput(salary, "");
+  setValueInput(workingHours, "");
+  setValueInput(position, "");
   modalHead.innerText = "Thêm nhân viên";
   modalAdd.style.display = "block";
   modalUpdate.style.display = "none";
@@ -70,3 +82,9 @@ addUserBtn.onclick = () => {
     rederListNv(listNv);
   }
 };
+$("#myModal").on("show.bs.modal", function () {
+  notifications.forEach((x) => {
+    x.style.display = "none";
+    x.innerText = "";
+  });
+});
