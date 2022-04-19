@@ -123,13 +123,14 @@
 					<div class="card-body">
 						<div class="row mb-3">
 							<div class="col">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Loại nhân viên"
-										id="searchName">
+								<form class="input-group" id="searchForm">
+									<input type="text" class="form-control"
+										placeholder="Loại nhân viên, Chức vụ,  Tên nhân viên..." id="searchName">
 									<div class="input-group-prepend">
-										<span class="input-group-text" id="btnTimNV"><i class="fa fa-search"></i></span>
+										<button type="submit" class="input-group-text" id="btnTimNV"><i
+												class="fa fa-search"></i></button>
 									</div>
-								</div>
+								</form>
 							</div>
 						</div>
 						<table class="table table-bordered table-hover myTable">
@@ -333,6 +334,7 @@
 	<script src="./js/CONST/index.js"></script>
 	<script src="./js/Module/index.js"></script>
 	<script src="./js/Validation/index.js"></script>
+	<script src="./js/search/index.js"></script>
 	<script src="./js/handleUpdate/index.js"></script>
 	<script src="./js/index.js"></script>
 </body>

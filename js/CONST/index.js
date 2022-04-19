@@ -14,6 +14,10 @@ const elRender = document.getElementById("tableDanhSach");
 const btnCloseModal = document.getElementById("btnDong");
 const addNvBtn = document.querySelector(".card-header #btnThem");
 
+const searchForm = document.getElementById("searchForm");
+const searchValue = document.getElementById("searchName");
+const searchBtn = document.getElementById("btnTimNV");
+
 const modalHead = document.querySelector("#myModal #header-title");
 const modalAdd = document.querySelector("#myModal #btnThemNV");
 const modalUpdate = document.querySelector("#myModal #btnCapNhat");

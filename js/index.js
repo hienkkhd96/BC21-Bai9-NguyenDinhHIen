@@ -2,7 +2,10 @@ function formatDate(dateString) {
   var subDateStr = dateString.split("-");
   return (str = subDateStr[2] + "/" + subDateStr[1] + "/" + subDateStr[0]);
 }
-const rederListNv = (arr) => {
+const renderListNv = (arr) => {
+  if (filterList.length > 0) {
+    arr = [...filterList];
+  }
   const html = arr
     .map((x, index) => {
       return `<tr key=${index} class="nhanvien">
@@ -26,7 +29,7 @@ const rederListNv = (arr) => {
   elRender.innerHTML = html;
 };
 if (listNv.length > 0) {
-  rederListNv(listNv);
+  renderListNv(listNv);
 }
 addNvBtn.onclick = () => {
   setValueInput(userName, "");
@@ -55,14 +58,12 @@ addUserBtn.onclick = () => {
       workingHours
     ) &&
     !setErrorLetters(userName, 4, 6) &&
-    !setErrorLength(password, 6, 10) &&
-    isFullText(fullName) &&
-    isPasswordError(password) &&
-    isEmail(email) &&
-    isNumber(salary, 1000000, 20000000) &&
-    isNumber(workingHours, 80, 200) &&
-    !isExists(userName, listNv, "userName", "Username đã tồn tại") &
-      !isExists(email, listNv, "email", "Email đã tồn tại");
+    !isExists(userName, listNv, "userName", "Username đã tồn tại") &&
+    isFullText(fullName) & !setErrorLength(password, 6, 10) &&
+    isPasswordError(password) & isEmail(email) &&
+    !isExists(email, listNv, "email", "Email đã tồn tại") &
+      isNumber(salary, 1000000, 20000000) &
+      isNumber(workingHours, 80, 200);
 
   if (!!isValid) {
     const newStaff = new Staff(
@@ -83,7 +84,7 @@ addUserBtn.onclick = () => {
     });
     btnCloseModal.click();
     localStorage.setItem("LIST-NV", JSON.stringify(listNv));
-    rederListNv(listNv);
+    renderListNv(listNv);
   }
 };
 $("#myModal").on("show.bs.modal", function () {

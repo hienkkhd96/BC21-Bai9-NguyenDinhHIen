@@ -5,7 +5,7 @@ const removeNv = function (userName) {
   const index = listNv.findIndex((x) => x.userName === userName);
   listNv.splice(index, 1);
   localStorage.setItem("LIST-NV", JSON.stringify(listNv));
-  rederListNv(listNv);
+  renderListNv(listNv);
 };
 let updateIndex;
 const updateNv = function (userNameNv) {
@@ -86,7 +86,7 @@ modalUpdate.onclick = function () {
       position: staffUpdate.position,
     };
     localStorage.setItem("LIST-NV", JSON.stringify(listNv));
-    rederListNv(listNv);
+    renderListNv(listNv);
     myModal.hide();
   }
 };
