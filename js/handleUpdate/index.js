@@ -1,13 +1,15 @@
 const setValueInput = (el, value) => {
   el.value = value;
 };
-const removeNv = function (index) {
+const removeNv = function (userName) {
+  const index = listNv.findIndex((x) => x.userName === userName);
   listNv.splice(index, 1);
   localStorage.setItem("LIST-NV", JSON.stringify(listNv));
   rederListNv(listNv);
 };
 let updateIndex;
-const updateNv = function (index) {
+const updateNv = function (userNameNv) {
+  const index = listNv.findIndex((x) => x.userName === userNameNv);
   updateIndex = index;
   const nhanvien = listNv[updateIndex];
   modalHead.innerText = "Cập nhật nhân viên";
@@ -56,14 +58,14 @@ modalUpdate.onclick = function () {
       position,
       workingHours
     ) &&
-    !setErrorLetters(userName, 4, 6) &
-      !setErrorLength(password, 6, 10) &
-      isFullText(fullName) &
-      isPasswordError(password) &
-      isEmail(email) &
-      isNumber(salary, 1000000, 20000000) &
-      isNumber(workingHours, 80, 200) &
-      !isExistsEmail();
+    !setErrorLetters(userName, 4, 6) &&
+    !setErrorLength(password, 6, 10) &&
+    isFullText(fullName) &&
+    isPasswordError(password) &&
+    isEmail(email) &&
+    isNumber(salary, 1000000, 20000000) &&
+    isNumber(workingHours, 80, 200) &&
+    !isExistsEmail();
 
   if (!!isValid) {
     const staffUpdate = new Staff(

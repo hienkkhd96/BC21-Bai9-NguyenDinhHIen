@@ -58,15 +58,17 @@ const setErrorLength = function (el, minValue = 0, maxValue = 256) {
 // setErrorLetters func return true if Letters error
 // setErrorLetters func return false if Letters not error
 const setErrorLetters = function (el, minValue = 0, maxValue = 256) {
-  let invalid = false;
+  let isError;
   //   Check params
   if (
     typeof minValue !== "number" ||
     typeof maxValue !== "number" ||
     minValue > maxValue
   ) {
-    console.error("Params are (els:Aray,minValue:Number>1,)");
-    return (invalid = true);
+    console.error(
+      "Params are (els:Aray,minValue:Number>=0,maxValue:Number>minValue)"
+    );
+    return (isError = true);
   } else {
     //   Get element notification
     const parent = el.parentNode;
@@ -84,23 +86,20 @@ const setErrorLetters = function (el, minValue = 0, maxValue = 256) {
       return newArr;
     }
     newArr = unique(arr);
+    console.log(newArr);
     // Check length Arr unique
-    invalid = invalid || newArr.length < minValue || newArr.length > maxValue;
-    if (!!invalid) {
+    isError = newArr.length < minValue || newArr.length > maxValue;
+    console.log(isError);
+    if (!!isError) {
       // Render Notification error
       notification.style.display = "block";
-      if (minValue != 0 && maxValue != 256) {
-        notification.innerText = `Không được ít hơn ${minValue} và nhiều hơn ${maxValue} ký số`;
-      } else if (minValue != 0 && maxValue === 256) {
-        notification.innerText = `Không được ít hơn ${minValue} ký số`;
-      } else {
-        notification.innerText = `Không được nhiều hơn ${maxValue} ký số`;
-      }
+      notification.innerText = `Không được ít hơn ${minValue} và nhiều hơn ${maxValue} ký số`;
+      return (isError = true);
     } else {
       notification.style.display = "none";
       notification.innerText = "";
+      return (isError = false);
     }
-    return invalid;
   }
 };
 isFullText = function (el) {

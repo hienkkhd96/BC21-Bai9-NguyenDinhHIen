@@ -11,8 +11,9 @@ const notifications = document.querySelectorAll(".sp-thongbao");
 const addUserBtn = document.getElementById("btnThemNV");
 const updateUserBtn = document.getElementById("btnCapNhat");
 const elRender = document.getElementById("tableDanhSach");
-
+const btnCloseModal = document.getElementById("btnDong");
 const addNvBtn = document.querySelector(".card-header #btnThem");
+
 const modalHead = document.querySelector("#myModal #header-title");
 const modalAdd = document.querySelector("#myModal #btnThemNV");
 const modalUpdate = document.querySelector("#myModal #btnCapNhat");

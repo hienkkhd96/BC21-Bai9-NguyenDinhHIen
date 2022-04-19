@@ -15,7 +15,11 @@ const rederListNv = (arr) => {
   <td>${x.position}</td>
   <td>${formatter.format(x.totalSalary)}</td>
   <td>${x.typeStaff}</td>
-  <td class="d-flex flex-column"><button class="btn btn-secondary btn-remove" onclick="removeNv(${index})">Xóa</button><button class="btn btn-primary mt-2 btn-update" onclick="updateNv(${index})">Sửa</button></td>
+  <td class="d-flex flex-column"><button class="btn btn-secondary btn-remove" onclick="removeNv('${
+    x.userName
+  }')">Xóa</button><button class="btn btn-primary mt-2 btn-update" onclick="updateNv('${
+        x.userName
+      }')">Sửa</button></td>
 </tr>`;
     })
     .join();
@@ -50,14 +54,14 @@ addUserBtn.onclick = () => {
       position,
       workingHours
     ) &&
-    !setErrorLetters(userName, 4, 6) &
-      !setErrorLength(password, 6, 10) &
-      isFullText(fullName) &
-      isPasswordError(password) &
-      isEmail(email) &
-      isNumber(salary, 1000000, 20000000) &
-      isNumber(workingHours, 80, 200) &
-      !isExists(userName, listNv, "userName", "Username đã tồn tại") &
+    !setErrorLetters(userName, 4, 6) &&
+    !setErrorLength(password, 6, 10) &&
+    isFullText(fullName) &&
+    isPasswordError(password) &&
+    isEmail(email) &&
+    isNumber(salary, 1000000, 20000000) &&
+    isNumber(workingHours, 80, 200) &&
+    !isExists(userName, listNv, "userName", "Username đã tồn tại") &
       !isExists(email, listNv, "email", "Email đã tồn tại");
 
   if (!!isValid) {
@@ -77,7 +81,7 @@ addUserBtn.onclick = () => {
       typeStaff: newStaff.typeStaff,
       position: newStaff.position,
     });
-
+    btnCloseModal.click();
     localStorage.setItem("LIST-NV", JSON.stringify(listNv));
     rederListNv(listNv);
   }
