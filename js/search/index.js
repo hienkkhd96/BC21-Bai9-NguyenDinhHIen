@@ -9,6 +9,5 @@ searchBtn.onclick = () => {
   let search_params = url.searchParams;
   search_params.set("q", filter);
   url.search = search_params.toString();
-  let new_url = url.toString();
-  window.location.href = new_url;
+  window.location.href = url.toString();
 };

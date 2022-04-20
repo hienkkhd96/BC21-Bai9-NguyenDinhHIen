@@ -20,6 +20,9 @@ const renderListNv = (arr) => {
         ) ||
         removeAccents(x.typeStaff.toLowerCase()).includes(
           searchParam.toLowerCase()
+        ) ||
+        removeAccents(formatDate(x.workingDays)).includes(
+          searchParam.toLowerCase()
         )
       );
     });
