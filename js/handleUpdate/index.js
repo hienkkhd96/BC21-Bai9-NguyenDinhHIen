@@ -1,6 +1,8 @@
+// Hàm để set giá trị cho ô input
 const setValueInput = (el, value) => {
   el.value = value;
 };
+// Xóa thông tin nhân viên
 const removeNv = function (userName) {
   const index = listNv.findIndex((x) => x.userName === userName);
   listNv.splice(index, 1);
@@ -8,6 +10,7 @@ const removeNv = function (userName) {
   renderListNv(listNv);
 };
 let updateIndex;
+// Set value khi muốn update nhân viên
 const updateNv = function (userNameNv) {
   const index = listNv.findIndex((x) => x.userName === userNameNv);
   updateIndex = index;
@@ -26,7 +29,9 @@ const updateNv = function (userNameNv) {
   setValueInput(workingHours, nhanvien.workingHours);
   setValueInput(position, nhanvien.level);
 };
+// Update thông tin nhân viên
 modalUpdate.onclick = function () {
+  // Kiểm tra trùng email với người khác
   const isExistsEmail = () => {
     const parent = email.parentNode;
     const notification = parent.parentNode.querySelector(".sp-thongbao");
@@ -47,6 +52,7 @@ modalUpdate.onclick = function () {
       return false;
     }
   };
+  // Validation khi update thông tin nhân viên
   const isValid =
     kiemTraRong(
       userName,
@@ -61,12 +67,12 @@ modalUpdate.onclick = function () {
     !setErrorLetters(userName, 4, 6) &&
     !setErrorLength(password, 6, 10) &&
     isFullText(fullName) &&
-    isPasswordError(password) &&
+    isPassword(password) &&
     isEmail(email) &&
     isNumber(salary, 1000000, 20000000) &&
     isNumber(workingHours, 80, 200) &&
     !isExistsEmail();
-
+  // Tạo đối tượng nhân viên mới
   if (!!isValid) {
     const staffUpdate = new Staff(
       userName.value,
@@ -78,6 +84,7 @@ modalUpdate.onclick = function () {
       position.value,
       workingHours.value * 1
     );
+    // Ẩn modal khi hoàn thành
     myModal.hide();
     listNv[updateIndex] = {
       ...staffUpdate,
@@ -85,6 +92,7 @@ modalUpdate.onclick = function () {
       typeStaff: staffUpdate.typeStaff,
       position: staffUpdate.position,
     };
+    // Lưu thông tin vào localStorage
     localStorage.setItem("LIST-NV", JSON.stringify(listNv));
     renderListNv(listNv);
     myModal.hide();

@@ -102,6 +102,8 @@ const setErrorLetters = function (el, minValue = 0, maxValue = 256) {
     }
   }
 };
+// isFullText return true if not Error
+// isFullText return false if Error
 isFullText = function (el) {
   const parent = el.parentNode;
   const notification = parent.parentNode.querySelector(".sp-thongbao");
@@ -120,7 +122,9 @@ isFullText = function (el) {
   }
   return regexText.test(value);
 };
-isPasswordError = function (el) {
+// isPasswordError return true if not Error
+// isPasswordError return false if Error
+isPassword = function (el) {
   const parent = el.parentNode;
   const notification = parent.parentNode.querySelector(".sp-thongbao");
   const value = el.value.trim();
@@ -137,6 +141,8 @@ isPasswordError = function (el) {
   }
   return regexText.test(value);
 };
+// isEmail return true if email
+// isEmail return false if not email
 isEmail = function (el) {
   const parent = el.parentNode;
   const notification = parent.parentNode.querySelector(".sp-thongbao");
@@ -153,6 +159,8 @@ isEmail = function (el) {
   }
   return regexText.test(value);
 };
+// isNumber return true if not Error
+// isNumber return false if Error
 isNumber = function (el, minValue, maxValue) {
   const parent = el.parentNode;
   const notification = parent.parentNode.querySelector(".sp-thongbao");
@@ -184,8 +192,8 @@ isNumber = function (el, minValue, maxValue) {
 //  params:
 // el- element check,
 // arr- array check
-// attr- value check
-
+// attr- arr.attr
+// Hàm kiểm tra trùng nhau
 const isExists = (el, arr, attr, message) => {
   const parent = el.parentNode;
   const notification = parent.parentNode.querySelector(".sp-thongbao");
@@ -203,7 +211,3 @@ const isExists = (el, arr, attr, message) => {
     return false;
   }
 };
-let formatter = new Intl.NumberFormat("vi-VN", {
-  style: "currency",
-  currency: "VND",
-});

@@ -1,6 +1,8 @@
 const renderListNv = (arr) => {
+  // Lấy param trên url để tìm kiếm nhân viên
   const searchParam = getParameterByName("q");
   filterNv = [...arr];
+  // Nếu có param thì xuất ra list Nhân viên tương ứng
   if (!!searchParam) {
     filterNv = filterNv.filter((x) => {
       return (
@@ -21,8 +23,10 @@ const renderListNv = (arr) => {
         )
       );
     });
+    // Set lại giá trị cho input search sau khi render lại
     searchValue.value = searchParam;
   }
+  // Nếu không có params thì xuất đầy đủ danh sách nhân viên
   const html = filterNv
     .map((x, index) => {
       return `<tr key=${index} class="nhanvien">
@@ -48,7 +52,9 @@ const renderListNv = (arr) => {
 if (listNv.length > 0) {
   renderListNv(listNv);
 }
+
 addNvBtn.onclick = () => {
+  // set value khi mở modal Thêm nhân viên
   setValueInput(userName, "");
   setValueInput(fullName, "");
   setValueInput(email, "");
@@ -62,7 +68,9 @@ addNvBtn.onclick = () => {
   modalUpdate.style.display = "none";
   userName.removeAttribute("disabled");
 };
+
 addUserBtn.onclick = () => {
+  // Validation khi thêm nhân viên
   const isValid =
     kiemTraRong(
       userName,
@@ -77,7 +85,7 @@ addUserBtn.onclick = () => {
     !setErrorLetters(userName, 4, 6) &&
     !isExists(userName, listNv, "userName", "Username đã tồn tại") &&
     isFullText(fullName) & !setErrorLength(password, 6, 10) &&
-    isPasswordError(password) & isEmail(email) &&
+    isPassword(password) & isEmail(email) &&
     !isExists(email, listNv, "email", "Email đã tồn tại") &
       isNumber(salary, 1000000, 20000000) &
       isNumber(workingHours, 80, 200);
@@ -99,14 +107,10 @@ addUserBtn.onclick = () => {
       typeStaff: newStaff.typeStaff,
       position: newStaff.position,
     });
+    // Đóng modal khi thêm thành công
     btnCloseModal.click();
+    // Lưu thông tin vào localStorage
     localStorage.setItem("LIST-NV", JSON.stringify(listNv));
     renderListNv(listNv);
   }
 };
-$("#myModal").on("show.bs.modal", function () {
-  notifications.forEach((x) => {
-    x.style.display = "none";
-    x.innerText = "";
-  });
-});
