@@ -1,12 +1,29 @@
-function formatDate(dateString) {
-  var subDateStr = dateString.split("-");
-  return (str = subDateStr[2] + "/" + subDateStr[1] + "/" + subDateStr[0]);
-}
 const renderListNv = (arr) => {
-  if (filterList.length > 0) {
-    arr = [...filterList];
+  const searchParam = getParameterByName("q");
+  filterNv = [...arr];
+  if (!!searchParam) {
+    filterNv = filterNv.filter((x) => {
+      return (
+        removeAccents(x.userName.toLowerCase()).includes(
+          searchParam.toLowerCase()
+        ) ||
+        removeAccents(x.fullName.toLowerCase()).includes(
+          searchParam.toLowerCase()
+        ) ||
+        removeAccents(x.email.toLowerCase()).includes(
+          searchParam.toLowerCase()
+        ) ||
+        removeAccents(x.position.toLowerCase()).includes(
+          searchParam.toLowerCase()
+        ) ||
+        removeAccents(x.typeStaff.toLowerCase()).includes(
+          searchParam.toLowerCase()
+        )
+      );
+    });
+    searchValue.value = searchParam;
   }
-  const html = arr
+  const html = filterNv
     .map((x, index) => {
       return `<tr key=${index} class="nhanvien">
   <td class="nowrap">

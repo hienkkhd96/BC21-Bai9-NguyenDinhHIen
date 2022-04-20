@@ -32,3 +32,36 @@ $("#myModal").on("show.bs.modal", function () {
     x.innerText = "";
   });
 });
+function formatDate(dateString) {
+  var subDateStr = dateString.split("-");
+  return (str = subDateStr[2] + "/" + subDateStr[1] + "/" + subDateStr[0]);
+}
+function getParameterByName(name, url = window.location.href) {
+  let url_string = `${url}`;
+  let c = new URL(url_string).searchParams.get(`${name}`);
+  return c;
+}
+function removeAccents(str) {
+  var AccentsMap = [
+    "aàảãáạăằẳẵắặâầẩẫấậ",
+    "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+    "dđ",
+    "DĐ",
+    "eèẻẽéẹêềểễếệ",
+    "EÈẺẼÉẸÊỀỂỄẾỆ",
+    "iìỉĩíị",
+    "IÌỈĨÍỊ",
+    "oòỏõóọôồổỗốộơờởỡớợ",
+    "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+    "uùủũúụưừửữứự",
+    "UÙỦŨÚỤƯỪỬỮỨỰ",
+    "yỳỷỹýỵ",
+    "YỲỶỸÝỴ",
+  ];
+  for (var i = 0; i < AccentsMap.length; i++) {
+    var re = new RegExp("[" + AccentsMap[i].substr(1) + "]", "g");
+    var char = AccentsMap[i][0];
+    str = str.replace(re, char);
+  }
+  return str;
+}
